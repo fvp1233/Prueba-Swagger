@@ -1,6 +1,8 @@
 import cors from "cors";
 import express from "express";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./utils/ricaldone-6fa-PruebaSwagger-1.0-unresolved.json" with {type: "json"};
 
 import barcodeRoutes from "./routes/barcodeRoutes.js";
 import excelRoutes from "./routes/excelRoutes.js";
@@ -54,6 +56,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/geocoding", geocodingRoutes);
 app.use("/api/closure-dates", closureDateRoutes);
 app.use("/api/fonts", fontRoutes);
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(notFound);
 app.use(errorHandler);
